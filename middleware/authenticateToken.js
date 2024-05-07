@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
 const secretKey = "secret12345";
-// jwt.verify needs token,secretkey,error and decoder authenticate token is for decoding 
 exports.authenticateToken = (req, res, next) => {
     const token = req.body.token;
     if (!token) {
