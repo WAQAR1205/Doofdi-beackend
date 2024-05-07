@@ -1,8 +1,8 @@
-import { catchAsyncErrors } from "../middlewares/catchAsyncErrors.js";
-import { User } from "../models/userSchema.js";
-import ErrorHandler from "../middlewares/error.js";
+const   catchAsyncErrors  = require("../middleware/catchAsyncErrors.js");
+const   User  = require("../models/userModel.js");
+const  ErrorHandler = require("../middleware/error.js");
 
-export const addNewAdmin = catchAsyncErrors(async (req, res, next) => {
+const addNewAdmin = catchAsyncErrors(async (req, res, next) => {
   const { firstName, lastName, email, phone, nic, dob, gender, password } =
     req.body;
   if (
@@ -41,7 +41,7 @@ export const addNewAdmin = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-export const getUserDetails = catchAsyncErrors(async (req, res, next) => {
+const getUserDetails = catchAsyncErrors(async (req, res, next) => {
   const user = req.user;
   res.status(200).json({
     success: true,
@@ -49,7 +49,7 @@ export const getUserDetails = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-export const logoutAdmin = catchAsyncErrors(async (req, res, next) => {
+const logoutAdmin = catchAsyncErrors(async (req, res, next) => {
   res
     .status(201)
     .cookie("adminToken", "", {
@@ -61,3 +61,7 @@ export const logoutAdmin = catchAsyncErrors(async (req, res, next) => {
       message: "Admin Logged Out Successfully.",
     });
 });
+
+module.exports = {
+  addNewAdmin,getUserDetails,logoutAdmin
+}

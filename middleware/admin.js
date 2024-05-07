@@ -1,9 +1,9 @@
-import { User } from "../models/userModel.js";
-import { catchAsyncErrors } from "./catchAsyncErrors.js";
-import ErrorHandler from "./error.js";
-import jwt from "jsonwebtoken";
+const  User  =require ("../models/userModel.js");
+const  catchAsyncErrors=require ("./catchAsyncErrors.js");
+const ErrorHandler=require ("./error.js");
+const jwt=require ("jsonwebtoken");
 
-export const isAdminAuthenticated = catchAsyncErrors(async (req, res, next) => {
+const isAdminAuthenticated = catchAsyncErrors(async (req, res, next) => {
   const token = req.cookies.adminToken;
   if (!token) {
     return next(new ErrorHandler("Dashboard User is not authenticated!", 400));
@@ -20,3 +20,5 @@ export const isAdminAuthenticated = catchAsyncErrors(async (req, res, next) => {
   }
   next();
 });
+
+module.exports = isAdminAuthenticated
